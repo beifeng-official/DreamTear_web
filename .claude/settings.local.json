@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xxd)",
+      "Bash(sed -i '372,377d' \"D:/dreamtear_web/DreamTear_web/index.html\")",
+      "Bash(sed -i '371r D:/dreamtear_web/DreamTear_web/footer_links.html' \"D:/dreamtear_web/DreamTear_web/index.html\")",
+      "Bash(sed -i '551s/.*/\\\\t\\\\t                content.classList.remove\\('\\\\''scale-95'\\\\''\\); content.classList.add\\('\\\\''scale-100'\\\\''\\);/' \"D:/dreamtear_web/DreamTear_web/index.html\")",
+      "Bash(sed -i '557s/.*/\\\\t\\\\t                content.classList.add\\('\\\\''scale-95'\\\\''\\); content.classList.remove\\('\\\\''scale-100'\\\\''\\);/' \"D:/dreamtear_web/DreamTear_web/index.html\")",
+      "Bash(sed -i '551s/^.*$/                    content.classList.remove\\('\\\\''scale-95'\\\\''\\); content.classList.add\\('\\\\''scale-100'\\\\''\\);/' \"D:/dreamtear_web/DreamTear_web/index.html\")",
+      "Bash(sed -i '557s/^.*$/                    content.classList.add\\('\\\\''scale-95'\\\\''\\); content.classList.remove\\('\\\\''scale-100'\\\\''\\);/' \"D:/dreamtear_web/DreamTear_web/index.html\")"
+    ]
+  }
+}
