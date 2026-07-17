@@ -390,15 +390,6 @@
 </div>
 </div>
 
-	<!-- 通用弹窗 -->
-	<div class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300" id="sorry-modal">
-	<div class="bg-[#1E1E2E] rounded-2xl p-8 max-w-sm w-full mx-4 text-center border border-white/10 shadow-2xl transform scale-95 transition-transform duration-300" id="sorry-modal-content">
-	<iconify-icon class="text-5xl text-indigo-400 mb-4 block" icon="mdi:emoticon-sad-outline"></iconify-icon>
-	<p class="text-white text-lg font-bold mb-2">很抱歉</p>
-	<p class="text-gray-400">我们还没做到</p>
-	<button class="mt-6 px-6 py-2 bg-indigo-500 hover:bg-indigo-600 rounded-lg text-white font-medium transition-colors cursor-pointer" id="modal-close-btn">我知道了</button>
-	</div>
-	</div>
 </footer>
 <script>
         // 粒子背景动画
@@ -540,7 +531,7 @@
 	        // 底部链接弹窗逻辑 —— 修改弹窗文案请找 showModal() 中的文字
 	        // 修改触发按钮请找 id="footer-links" 中的 .footer-link 元素
 	        // ============================================================
-	        (function() {
+	        document.addEventListener('DOMContentLoaded', function() {
 	            var modal    = document.getElementById('sorry-modal');
 	            var content  = document.getElementById('sorry-modal-content');
 	            var closeBtn = document.getElementById('modal-close-btn');
@@ -573,7 +564,16 @@
 	            document.addEventListener('keydown', function(e) {
 	                if (e.key === 'Escape') hideModal();
 	            });
-	        })();
+	        });
     </script>
+	<!-- 通用弹窗 -->
+	<div class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300" id="sorry-modal">
+	<div class="bg-[#1E1E2E] rounded-2xl p-8 max-w-sm w-full mx-4 text-center border border-white/10 shadow-2xl transform scale-95 transition-transform duration-300" id="sorry-modal-content">
+	<iconify-icon class="text-5xl text-indigo-400 mb-4 block" icon="mdi:emoticon-sad-outline"></iconify-icon>
+	<p class="text-white text-lg font-bold mb-2">很抱歉</p>
+	<p class="text-gray-400">我们还没做到</p>
+	<button class="mt-6 px-6 py-2 bg-indigo-500 hover:bg-indigo-600 rounded-lg text-white font-medium transition-colors cursor-pointer" id="modal-close-btn">我知道了</button>
+	</div>
+	</div>
 </body>
 </html>

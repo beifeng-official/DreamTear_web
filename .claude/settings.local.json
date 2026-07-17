@@ -7,7 +7,9 @@
       "Bash(sed -i '551s/.*/\\\\t\\\\t                content.classList.remove\\('\\\\''scale-95'\\\\''\\); content.classList.add\\('\\\\''scale-100'\\\\''\\);/' \"D:/dreamtear_web/DreamTear_web/index.html\")",
       "Bash(sed -i '557s/.*/\\\\t\\\\t                content.classList.add\\('\\\\''scale-95'\\\\''\\); content.classList.remove\\('\\\\''scale-100'\\\\''\\);/' \"D:/dreamtear_web/DreamTear_web/index.html\")",
       "Bash(sed -i '551s/^.*$/                    content.classList.remove\\('\\\\''scale-95'\\\\''\\); content.classList.add\\('\\\\''scale-100'\\\\''\\);/' \"D:/dreamtear_web/DreamTear_web/index.html\")",
-      "Bash(sed -i '557s/^.*$/                    content.classList.add\\('\\\\''scale-95'\\\\''\\); content.classList.remove\\('\\\\''scale-100'\\\\''\\);/' \"D:/dreamtear_web/DreamTear_web/index.html\")"
+      "Bash(sed -i '557s/^.*$/                    content.classList.add\\('\\\\''scale-95'\\\\''\\); content.classList.remove\\('\\\\''scale-100'\\\\''\\);/' \"D:/dreamtear_web/DreamTear_web/index.html\")",
+      "Bash(sed -n '393,401p' \"D:/dreamtear_web/DreamTear_web/index.html\")",
+      "Bash(sed -i '393,401d' \"D:/dreamtear_web/DreamTear_web/index.html\")"
     ]
   }
 }
