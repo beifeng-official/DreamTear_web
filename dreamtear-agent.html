@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DreamTear Agent - 自主 AI 编程智能体</title>
+<!-- Tailwind CSS (本地) -->
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<!-- Iconify 图标 -->
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+        .bg-tech-gradient {
+            background: radial-gradient(circle at 50% 50%, #1A1A2E 0%, #0F0F1A 100%);
+        }
+        .neon-border {
+            position: relative;
+        }
+        .neon-border::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(to right, #06B6D4, #6366F1, #8B5CF6);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+        .neon-border:hover::after {
+            opacity: 1;
+        }
+        .glass-morphism {
+            background: rgba(30, 30, 46, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0F0F1A; }
+        ::-webkit-scrollbar-thumb { background: #1E1E2E; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6366F1; }
+    </style>
+</head>
+<body class="bg-[#0F0F1A] text-white font-sans selection:bg-indigo-500 selection:text-white">
+<!-- 导航栏 -->
+<nav class="fixed top-0 w-full z-50 transition-all duration-300 py-4" id="navbar">
+<div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-gradient-to-br from-cyan-400 to-indigo-600 rounded-lg flex items-center justify-center">
+<iconify-icon class="text-xl" icon="mdi:robot-auto"></iconify-icon>
+</div>
+<span class="text-xl font-bold tracking-tight">DreamTear <span class="text-indigo-400">Agent</span></span>
+</div>
+<div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+<a class="hover:text-white transition-colors" href="#features">核心能力</a>
+<a class="hover:text-white transition-colors" href="#demo">演示</a>
+<a class="hover:text-white transition-colors" href="#tech">技术优势</a>
+<a class="hover:text-white transition-colors" href="#faq">常见问题</a>
+</div>
+<a class="px-5 py-2 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full text-sm font-semibold hover:shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all" 
+   href="https://github.com/beifeng-official/DreamTear-AiHelper/archive/refs/tags/v1.5.1.zip" 
+   download>
+   免费下载
+</a>
+</div>
+</nav>
+<!-- Hero 区域 -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+<!-- 粒子背景 Canvas -->
+<canvas class="absolute inset-0 z-0" id="hero-canvas"></canvas>
+<div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-green-500/10 border border-green-500/30 rounded-full mb-8 animate-pulse">
+<div class="w-2 h-2 bg-green-500 rounded-full"></div>
+<span class="text-xs font-bold tracking-widest text-green-500">AUTONOMOUS AI CODING AGENT</span>
+</div>
+<h1 class="text-5xl md:text-8xl font-black mb-6 tracking-tight">
+                DreamTear <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-500">Agent</span>
+</h1>
+<p class="text-xl md:text-2xl text-gray-300 mb-4 font-light">面向本地开发场景的自主 AI 编程智能体</p>
+<div class="flex items-center justify-center gap-4 text-purple-400 font-mono tracking-[0.3em] text-sm md:text-lg mb-12">
+<span>PLAN</span> <span class="text-gray-600">·</span>
+<span>ACT</span> <span class="text-gray-600">·</span>
+<span>OBSERVE</span> <span class="text-gray-600">·</span>
+<span>VERIFY</span>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
+<a class="group relative px-10 py-4 bg-gradient-to-r from-cyan-500 to-indigo-600 rounded-xl font-bold text-lg overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(99,102,241,0.3)]"
+ href="https://github.com/beifeng-official/DreamTear-AiHelper/archive/refs/tags/v1.5.1.zip" 
+   download>
+<span class="relative z-10">免费下载</span>
+<div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+</a>
+<button class="px-10 py-4 border border-white/20 rounded-xl font-bold text-lg hover:bg-white/5 transition-all">
+                    在线体验 Demo
+                </button>
+</div>
+<div class="flex flex-wrap justify-center items-center gap-8 text-gray-500 text-sm">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-lg" icon="mdi:apple"></iconify-icon> macOS
+                </div>
+<div class="flex items-center gap-2">
+<iconify-icon class="text-lg" icon="mdi:microsoft-windows"></iconify-icon> Windows
+                </div>
+<div class="flex items-center gap-2">
+<iconify-icon class="text-lg" icon="mdi:linux"></iconify-icon> Linux
+                </div>
+<div class="h-4 w-[1px] bg-gray-700 hidden sm:block"></div>
+<div class="px-3 py-1 bg-indigo-500/10 border border-indigo-500/30 rounded text-indigo-400 text-xs font-bold uppercase tracking-wider">
+                    C++ / Qt 桌面应用
+                </div>
+</div>
+</div>
+<!-- 装饰光晕 -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-600/10 blur-[120px] rounded-full -z-10"></div>
+</section>
+<!-- 核心能力 (Features) -->
+<section class="py-24 bg-[#0F0F1A]" id="features">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-16 reveal">
+<h2 class="text-3xl md:text-4xl font-bold mb-4">重新定义 AI 编程</h2>
+<p class="text-gray-400">不仅仅是补全代码，而是像高级工程师一样独立工作</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Feature 1 -->
+<div class="neon-border p-8 rounded-3xl bg-[#16162A] reveal group transition-all">
+<div class="flex justify-between items-start mb-6">
+<div class="text-indigo-500 font-mono font-bold">01 / CONTEXT</div>
+<iconify-icon class="text-3xl text-indigo-400" icon="mdi:head-sync-outline"></iconify-icon>
+</div>
+<h3 class="text-xl font-bold mb-3 group-hover:text-indigo-400 transition-colors">多轮上下文理解</h3>
+<p class="text-gray-400 leading-relaxed text-sm">保持会话目标、文件指代与任务状态，在长时间开发会话中准确理解您的需求</p>
+</div>
+<!-- Feature 2 -->
+<div class="neon-border p-8 rounded-3xl bg-[#16162A] reveal group transition-all" style="transition-delay: 100ms;">
+<div class="flex justify-between items-start mb-6">
+<div class="text-cyan-500 font-mono font-bold">02 / CODING</div>
+<iconify-icon class="text-3xl text-cyan-400" icon="mdi:code-braces"></iconify-icon>
+</div>
+<h3 class="text-xl font-bold mb-3 group-hover:text-cyan-400 transition-colors">本地代码执行</h3>
+<p class="text-gray-400 leading-relaxed text-sm">读写文件、修改代码、运行命令与调试，在本地开发环境中直接执行代码操作</p>
+</div>
+<!-- Feature 3 -->
+<div class="neon-border p-8 rounded-3xl bg-[#16162A] reveal group transition-all" style="transition-delay: 200ms;">
+<div class="flex justify-between items-start mb-6">
+<div class="text-purple-500 font-mono font-bold">03 / VISION</div>
+<iconify-icon class="text-3xl text-purple-400" icon="mdi:eye-outline"></iconify-icon>
+</div>
+<h3 class="text-xl font-bold mb-3 group-hover:text-purple-400 transition-colors">视觉定位 (Computer Use)</h3>
+<p class="text-gray-400 leading-relaxed text-sm">屏幕观察、语义定位、操作与窗口闭环，像人类一样理解 UI 界面</p>
+</div>
+<!-- Feature 4 -->
+<div class="neon-border p-8 rounded-3xl bg-[#16162A] reveal group transition-all">
+<div class="flex justify-between items-start mb-6">
+<div class="text-emerald-500 font-mono font-bold">04 / WEB</div>
+<iconify-icon class="text-3xl text-emerald-400" icon="mdi:web"></iconify-icon>
+</div>
+<h3 class="text-xl font-bold mb-3 group-hover:text-emerald-400 transition-colors">联网搜索分析</h3>
+<p class="text-gray-400 leading-relaxed text-sm">实时搜索技术文档、API 参考与解决方案，基于最新信息做出开发决策</p>
+</div>
+<!-- Feature 5 -->
+<div class="neon-border p-8 rounded-3xl bg-[#16162A] reveal group transition-all" style="transition-delay: 100ms;">
+<div class="flex justify-between items-start mb-6">
+<div class="text-amber-500 font-mono font-bold">05 / PLAN</div>
+<iconify-icon class="text-3xl text-amber-400" icon="mdi:sitemap-outline"></iconify-icon>
+</div>
+<h3 class="text-xl font-bold mb-3 group-hover:text-amber-400 transition-colors">智能任务规划</h3>
+<p class="text-gray-400 leading-relaxed text-sm">将复杂开发任务分解为可执行的步骤，自动规划最佳的编码路径</p>
+</div>
+<!-- Feature 6 -->
+<div class="neon-border p-8 rounded-3xl bg-[#16162A] reveal group transition-all" style="transition-delay: 200ms;">
+<div class="flex justify-between items-start mb-6">
+<div class="text-red-500 font-mono font-bold">06 / VERIFY</div>
+<iconify-icon class="text-3xl text-red-400" icon="mdi:shield-check-outline"></iconify-icon>
+</div>
+<h3 class="text-xl font-bold mb-3 group-hover:text-red-400 transition-colors">自动验证反馈</h3>
+<p class="text-gray-400 leading-relaxed text-sm">自动检测代码质量、运行测试并修复问题，形成完整的开发闭环</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 数据指标区域 -->
+<section class="py-20 bg-[#16162A]">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="text-center reveal">
+</div>
+<div class="text-center reveal" style="transition-delay: 100ms;">
+<div class="text-4xl md:text-5xl font-black text-cyan-400 mb-2">500万+</div>
+<div class="text-gray-400 text-sm">行/天 AI 生成代码</div>
+</div>
+<div class="text-center reveal" style="transition-delay: 200ms;">
+<div class="text-4xl md:text-5xl font-black text-emerald-400 mb-2">87%</div>
+<div class="text-gray-400 text-sm">编码效率提升</div>
+</div>
+<div class="text-center reveal" style="transition-delay: 300ms;">
+</div>
+</div>
+</div>
+</section>
+<!-- Demo 演示区域 -->
+<section class="py-24 bg-[#0F0F1A]" id="demo">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div class="reveal">
+<h2 class="text-4xl font-bold mb-6">看看 DreamTear Agent <br/><span class="text-indigo-400">如何自主工作</span></h2>
+<p class="text-gray-400 mb-8 leading-relaxed">
+                        只需给出模糊的需求描述，DreamTear Agent 即可自动规划路径。它会分析现有代码、编写补丁、运行测试并根据错误反馈进行自我修正，直到任务完美交付。
+                    </p>
+<ul class="space-y-4">
+<li class="flex items-center gap-3">
+<iconify-icon class="text-green-500 text-xl" icon="mdi:check-circle"></iconify-icon>
+<span>自动扫描项目依赖与环境配置</span>
+</li>
+<li class="flex items-center gap-3">
+<iconify-icon class="text-green-500 text-xl" icon="mdi:check-circle"></iconify-icon>
+<span>支持 C++/Qt 等复杂桌面应用逻辑</span>
+</li>
+<li class="flex items-center gap-3">
+<iconify-icon class="text-green-500 text-xl" icon="mdi:check-circle"></iconify-icon>
+<span>实时反馈运行结果与修复建议</span>
+</li>
+</ul>
+</div>
+<div class="reveal glass-morphism rounded-2xl overflow-hidden shadow-2xl border border-white/5" style="transition-delay: 200ms;">
+
+<!-- 代码输入区 -->
+<div class="flex-1 pl-6">
+<div class="text-gray-300" id="typewriter-code"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 深度技术优势 -->
+<section class="py-24 bg-[#16162A]" id="tech">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid md:grid-cols-3 gap-12">
+<div class="text-center reveal">
+<div class="w-16 h-16 bg-indigo-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+<iconify-icon class="text-4xl text-indigo-400" icon="mdi:lock-outline"></iconify-icon>
+</div>
+<h3 class="text-xl font-bold mb-4">🔒 隐私安全</h3>
+<p class="text-gray-400 text-sm">所有代码在本地执行，无需上传至云端，保护企业核心代码资产</p>
+</div>
+<div class="text-center reveal" style="transition-delay: 100ms;">
+<div class="w-16 h-16 bg-cyan-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+<iconify-icon class="text-4xl text-cyan-400" icon="mdi:lightning-bolt-outline"></iconify-icon>
+</div>
+<h3 class="text-xl font-bold mb-4">⚡ 极致性能</h3>
+<p class="text-gray-400 text-sm">基于 C++/Qt 原生构建，启动速度毫秒级，资源占用极低</p>
+</div>
+<div class="text-center reveal" style="transition-delay: 200ms;">
+<div class="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+<iconify-icon class="text-4xl text-purple-400" icon="mdi:puzzle-outline"></iconify-icon>
+</div>
+<h3 class="text-xl font-bold mb-4">🔌 灵活扩展</h3>
+<p class="text-gray-400 text-sm">支持自定义工具链与插件系统，可无缝集成到现有开发工作流</p>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ 区域 -->
+<section class="py-24 bg-[#0F0F1A]" id="faq">
+<div class="max-w-3xl mx-auto px-6">
+<h2 class="text-4xl font-bold mb-12 text-center reveal">常见问题</h2>
+<div class="space-y-4">
+<!-- FAQ Item 1 -->
+<div class="faq-item reveal bg-[#16162A] rounded-2xl border border-white/5 overflow-hidden">
+<button class="w-full px-8 py-5 flex items-center justify-between text-left font-bold transition-colors hover:text-indigo-400">
+<span>DreamTear Agent 与 Cursor / Copilot 有什么区别？</span>
+<iconify-icon class="text-xl transition-transform duration-300" icon="mdi:chevron-down"></iconify-icon>
+</button>
+<div class="faq-content h-0 overflow-hidden transition-all duration-300 px-8">
+<div class="pb-5 text-gray-400 text-sm leading-relaxed">
+                            DreamTear Agent 专注于本地开发场景，所有代码执行完全在本地完成，无需担心信息泄露。同时支持 C++/Qt 桌面应用开发。
+                        </div>
+</div>
+</div>
+<!-- FAQ Item 2 -->
+<div class="faq-item reveal bg-[#16162A] rounded-2xl border border-white/5 overflow-hidden">
+<button class="w-full px-8 py-5 flex items-center justify-between text-left font-bold transition-colors hover:text-indigo-400">
+<span>代码数据安全如何保障？</span>
+<iconify-icon class="text-xl transition-transform duration-300" icon="mdi:chevron-down"></iconify-icon>
+</button>
+<div class="faq-content h-0 overflow-hidden transition-all duration-300 px-8">
+<div class="pb-5 text-gray-400 text-sm leading-relaxed">
+                            DreamTear Agent 所有代码分析和执行均在本地完成，代码不会上传至任何云端服务器。您可以选择在完全离线环境下使用，确保核心代码资产零泄露风险。
+                        </div>
+</div>
+</div>
+<!-- FAQ Item 3 -->
+<div class="faq-item reveal bg-[#16162A] rounded-2xl border border-white/5 overflow-hidden">
+<button class="w-full px-8 py-5 flex items-center justify-between text-left font-bold transition-colors hover:text-indigo-400">
+<span>支持哪些操作系统和开发环境？</span>
+<iconify-icon class="text-xl transition-transform duration-300" icon="mdi:chevron-down"></iconify-icon>
+</button>
+<div class="faq-content h-0 overflow-hidden transition-all duration-300 px-8">
+<div class="pb-5 text-gray-400 text-sm leading-relaxed">
+                            目前支持 Windows桌面操作系统。开发环境方面，支持 VS Code、JetBrains 系列 IDE，以及命令行终端集成。
+                        </div>
+</div>
+</div>
+<!-- FAQ Item 4 -->
+<div class="faq-item reveal bg-[#16162A] rounded-2xl border border-white/5 overflow-hidden">
+<button class="w-full px-8 py-5 flex items-center justify-between text-left font-bold transition-colors hover:text-indigo-400">
+<span>如何安装和开始使用？</span>
+<iconify-icon class="text-xl transition-transform duration-300" icon="mdi:chevron-down"></iconify-icon>
+</button>
+<div class="faq-content h-0 overflow-hidden transition-all duration-300 px-8">
+<div class="pb-5 text-gray-400 text-sm leading-relaxed">
+                            访问官网下载对应平台的安装包，安装完成后启动 Agent，选择您的项目目录即可开始使用。首次使用建议查看内置的快速入门指南（约 5 分钟即可上手）。
+                        </div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 底部 CTA 区域 -->
+<section class="py-24 relative overflow-hidden" id="download">
+<div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+<h2 class="text-5xl md:text-6xl font-black mb-8">开始使用 DreamTear Agent</h2>
+<p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">让 AI 智能体帮你完成 80% 的编码工作，释放你的创造力</p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
+<a href="https://github.com/beifeng-official/DreamTear-AiHelper/archive/refs/tags/v1.5.1.zip" download
+   class="px-12 py-5 bg-gradient-to-r from-cyan-500 to-indigo-600 rounded-xl font-bold text-xl hover:shadow-[0_0_40px_rgba(99,102,241,0.5)] transition-all inline-block text-center text-white no-underline">
+   免费下载
+</a>
+<button class="px-12 py-5 border border-white/20 rounded-xl font-bold text-xl hover:bg-white/5 transition-all">
+                    查看 GitHub →
+                </button>
+</div>
+<div class="flex justify-center gap-8 text-gray-400">
+<iconify-icon class="text-3xl" icon="mdi:apple"></iconify-icon>
+<iconify-icon class="text-3xl" icon="mdi:microsoft-windows"></iconify-icon>
+<iconify-icon class="text-3xl" icon="mdi:linux"></iconify-icon>
+</div>
+<p class="mt-6 text-gray-500 text-sm font-medium">无需注册，下载即用</p>
+</div>
+<!-- 背景光晕 -->
+<div class="absolute inset-0 bg-gradient-to-b from-[#0F0F1A] via-indigo-900/10 to-[#0F0F1A]"></div>
+</section>
+<!-- Footer -->
+<footer class="py-12 glass-morphism border-t border-white/5">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 bg-gradient-to-br from-cyan-400 to-indigo-600 rounded-md flex items-center justify-center">
+<iconify-icon class="text-sm" icon="mdi:robot-auto"></iconify-icon>
+</div>
+<span class="text-lg font-bold">DreamTear <span class="text-indigo-400">Agent</span></span>
+</div>
+<div class="flex gap-8 text-sm text-gray-400 font-medium">
+<a class="hover:text-white transition-colors" href="#">产品文档</a>
+<a class="hover:text-white transition-colors" href="#">隐私政策</a>
+<a class="hover:text-white transition-colors" href="#">服务条款</a>
+<a class="hover:text-white transition-colors" href="#">联系我们</a>
+</div>
+<div class="text-gray-500 text-xs">
+                    © 2026 DreamTear AI Tech. All rights reserved.
+                </div>
+</div>
+</div>
+</footer>
+<script>
+        // 粒子背景动画
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for(let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 1,
+                    speedX: (Math.random() - 0.5) * 0.5,
+                    speedY: (Math.random() - 0.5) * 0.5,
+                    opacity: Math.random() * 0.5 + 0.2
+                });
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(99, 102, 241, 0.5)';
+            
+            particles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+                
+                if(p.x < 0) p.x = canvas.width;
+                if(p.x > canvas.width) p.x = 0;
+                if(p.y < 0) p.y = canvas.height;
+                if(p.y > canvas.height) p.y = 0;
+                
+                ctx.globalAlpha = p.opacity;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        animateParticles();
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if(window.scrollY > 50) {
+                nav.classList.add('glass-morphism', 'py-3');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.remove('glass-morphism', 'py-3');
+                nav.classList.add('py-4');
+            }
+        });
+
+        // 滚动淡入动画 (Intersection Observer)
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // 打字机模拟动画
+        const codeElement = document.getElementById('typewriter-code');
+        const codeSteps = [
+            { text: "> Analyzing project structure...", delay: 500, color: 'text-indigo-400' },
+            { text: "> Goal: Add a 'Save' button to the Qt MainWindow.", delay: 800, color: 'text-gray-400' },
+            { text: "> PLAN: \n  1. Modify mainwindow.h\n  2. Update ui_main.h\n  3. Implement slot in main.cpp", delay: 1000, color: 'text-emerald-400' },
+            { text: "\n// mainwindow.h\nvoid onSaveTriggered();", delay: 500, color: 'text-blue-300' },
+            { text: "\n// main.cpp\nvoid MainWindow::onSaveTriggered() {\n    file.save(current_doc);\n}", delay: 800, color: 'text-blue-300' },
+            { text: "\n> ACTION: Files modified.", delay: 500, color: 'text-indigo-400' },
+            { text: "> VERIFY: Compilation successful. Unit tests passed.", delay: 1000, color: 'text-green-500 font-bold' },
+            { text: "\n> TASK COMPLETED.", delay: 500, color: 'text-white' }
+        ];
+
+        let stepIndex = 0;
+        function typeNextStep() {
+            if (stepIndex >= codeSteps.length) {
+                setTimeout(() => {
+                    codeElement.innerHTML = "";
+                    stepIndex = 0;
+                    typeNextStep();
+                }, 3000);
+                return;
+            }
+
+            const step = codeSteps[stepIndex];
+            const span = document.createElement('div');
+            span.className = `${step.color} mb-1 whitespace-pre-wrap`;
+            codeElement.appendChild(span);
+            
+            let charIndex = 0;
+            const typing = setInterval(() => {
+                if (charIndex < step.text.length) {
+                    span.textContent += step.text[charIndex];
+                    charIndex++;
+                } else {
+                    clearInterval(typing);
+                    stepIndex++;
+                    setTimeout(typeNextStep, step.delay);
+                }
+            }, 30);
+        }
+        typeNextStep();
+
+        // FAQ 手风琴交互
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const button = item.querySelector('button');
+            const content = item.querySelector('.faq-content');
+            const icon = item.querySelector('iconify-icon');
+
+            button.addEventListener('click', () => {
+                const isOpen = content.style.height && content.style.height !== '0px';
+                
+                // 关闭所有其他的
+                document.querySelectorAll('.faq-content').forEach(c => {
+                    c.style.height = '0px';
+                    c.closest('.faq-item').querySelector('iconify-icon').style.transform = 'rotate(0deg)';
+                });
+
+                if (!isOpen) {
+                    content.style.height = content.scrollHeight + 'px';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
